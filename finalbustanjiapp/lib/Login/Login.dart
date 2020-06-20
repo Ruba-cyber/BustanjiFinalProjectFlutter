@@ -14,6 +14,7 @@ import 'package:language/CustomDesign/Icons.dart';
 import 'package:language/CustomText/CustomEmail.dart';
 import 'package:language/CustomText/CustomPassword.dart';
 import 'package:language/CustomerInfo/CustomerData.dart';
+import 'package:language/SplashScreen/SpalshScreen.dart';
 import 'package:language/Urls/BustanjiUrl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
@@ -187,7 +188,35 @@ class _Login extends State<Login> {
       onLocaleChange(Locale(languagesMap[language]));
     });
   }
+  AlertDialogShow(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+      return AlertDialog(
+          title: Text(ApplicationLocalizations.of(context).translate("Restart_App") ),
+          content: Text(ApplicationLocalizations.of(context).translate("Restart_App_Warning")),
+          actions: <Widget>[
+      Row(children: <Widget>[
+          MaterialButton(
+          elevation: 5.0,
+          onPressed: () {
 
+            Navigator.of(context).pop();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SplashScreen(),
+                            ));
+          },
+          child: Text(ApplicationLocalizations.of(context).translate("ok"))),
+    MaterialButton(
+    elevation: 5.0,
+    onPressed: () {
+    Navigator.of(context).pop();
+    },
+    child: Text(ApplicationLocalizations.of(context).translate("Cancel")),
+    )
+    ])]);});}
   @override
   Widget build(BuildContext context) {
 
@@ -242,7 +271,7 @@ class _Login extends State<Login> {
                                   new Radius.circular(10.0)),
                               color: Colors.grey[200],
                             ),
-                            height: 50,
+
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               child: FittedBox(
@@ -261,7 +290,7 @@ class _Login extends State<Login> {
                                               textFont: "Nexa_Bold",
                                             ).textFieldWithOutPrefix(
                                                 ApplicationLocalizations.of(context).translate("Email"),
-                                              ApplicationLocalizations.of(context).translate("Email")),
+                                              ApplicationLocalizations.of(context).translate("Email"),context),
                                           ),
                                         ),
                                       ),
@@ -300,7 +329,7 @@ class _Login extends State<Login> {
                                             textFont: "Nexa_Bold",
                                           ).textFieldWithOutPrefix(
                                               ApplicationLocalizations.of(context).translate("Password"),
-                                              ApplicationLocalizations.of(context).translate("Password")),
+                                              ApplicationLocalizations.of(context).translate("Password"),context),
                                         ),
                                       ),
                                     ),

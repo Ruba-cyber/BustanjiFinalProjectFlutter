@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
-class CustomEmailText {
+class CustomText {
 
   final double outPrefixSvgWidth;
   final double outPrefixSvgHeight;
@@ -26,7 +26,7 @@ class CustomEmailText {
   final bool clickable;
   final int maxLength;
 
-  CustomEmailText (
+  CustomText(
       {
         this.outPrefixSvgWidth = 22.0,
         this.outPrefixSvgHeight = 22.0,
@@ -35,7 +35,7 @@ class CustomEmailText {
         this.inputBoxController,
         this.isPassword = false,
         this.focusNod,
-        this.keyBoardType = TextInputType.emailAddress,
+        this.keyBoardType = TextInputType.text,
         this.prefix ,
         this.suffix ,
         this.textColor = 0xFF757575,
@@ -49,9 +49,9 @@ class CustomEmailText {
     var loginBtn = new Container(
       margin: margin,
       child: new Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          textField(hint, errorMsg,context),
+          textField(hint, errorMsg,context)
         ],
       ),
     );
@@ -69,31 +69,28 @@ class CustomEmailText {
     var loginBtn = new EnsureVisibleWhenFocused(
         focusNode: focusNode,
         child: new FittedBox(
+          child: Container(width: MediaQuery.of(context).size.width/1.3,padding: EdgeInsets.only(left: 5,right: 5),
+            child: new TextFormField(
+              obscureText: isPassword,
+              controller: inputBoxController,
+              focusNode: focusNode,
+              keyboardType: keyBoardType,
+              enabled: clickable,
+              textAlign: textAlign,
+              inputFormatters: list,
+              decoration: InputDecoration(
 
-            child:Container(padding:EdgeInsets.only(left: 7,right: 7,top: 3,bottom: 3),width: MediaQuery.of(context).size.width/1.3,height: 50,
-
-              child:Container(padding:EdgeInsets.only(left: 5,right: 5),width: 300,height: 50,
-
-                child: new TextFormField(
-                  obscureText: isPassword,
-                  controller: inputBoxController,
-                  focusNode: focusNode,
-                  keyboardType: keyBoardType,
-                  enabled: clickable,
-                  textAlign: TextAlign.start,
-                  inputFormatters: list,
-                  decoration: InputDecoration(
-                    hintText: hint,
-                    prefixIcon: prefix,
-                    suffixIcon: suffix,
-
-                  ),
-                  validator: (val) => val.isEmpty ? errorMsg : null,
-                  onSaved: (val) => val,
-                  style: TextStyle(fontSize: 17),),
+                hintText: hint,
+                prefixIcon: prefix,
+                suffixIcon: suffix,
               ),
+              validator: (val) => val.isEmpty ? errorMsg : null,
+              onSaved: (val) => val,
+            ),
 
-            )));
+          ),
+
+        ));
 
     return loginBtn;
   }
@@ -226,7 +223,6 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
 
   @override
   Widget build(BuildContext context) {
-
     return widget.child;
   }
 }

@@ -44,13 +44,13 @@ class CustomPasswordText {
         this.maxLength = 0,
         this.textAlign = TextAlign.start});
 
-  Widget textFieldWithOutPrefix(String hint, String errorMsg) {
+  Widget textFieldWithOutPrefix(String hint, String errorMsg,BuildContext context) {
     var loginBtn = new Container(
       margin: margin,
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          textField(hint, errorMsg),
+          textField(hint, errorMsg,context),
         ],
       ),
     );
@@ -58,7 +58,7 @@ class CustomPasswordText {
     return loginBtn;
   }
 
-  Widget textField(String hint, String errorMsg) {
+  Widget textField(String hint, String errorMsg,BuildContext context) {
     FocusNode focusNode =
     focusNod != null ? focusNod : new FocusNode();
 
@@ -68,7 +68,7 @@ class CustomPasswordText {
     var loginBtn = new EnsureVisibleWhenFocused(
         focusNode: focusNode,
         child: new FittedBox(
-          child: Container(width: 300,padding: EdgeInsets.only(left: 8,right: 8),
+          child: Container(width: MediaQuery.of(context).size.width/1.3,padding: EdgeInsets.only(left: 8,right: 8),
             child: new TextFormField(
               obscureText: isPassword,
               controller: inputBoxController,
