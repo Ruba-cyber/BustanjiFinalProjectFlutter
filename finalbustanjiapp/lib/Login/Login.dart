@@ -9,7 +9,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:language/AppTranslation/AppTranslation.dart';
 import 'package:language/AppTranslation/Application.dart';
+import 'package:language/CustomDesign/CurveShape.dart';
+import 'package:language/CustomDesign/Icons.dart';
+import 'package:language/CustomText/CustomEmail.dart';
+import 'package:language/CustomText/CustomPassword.dart';
 import 'package:language/CustomerInfo/CustomerData.dart';
+import 'package:language/Urls/BustanjiUrl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 
@@ -73,7 +78,7 @@ class _Login extends State<Login> {
 
 
   Future<List> LoginDatabase() async {
-    var url = Urls.login;
+    var url = BustanjiUrls.login;
     http.Response response =
     await http.post(url, body: {'email': teEmail.text, 'password': tePassword.text});
     var user = json.decode(response.body);
@@ -112,12 +117,12 @@ class _Login extends State<Login> {
           isshowing = false;
         });
 
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-             //     HomePage(),
-            ));
+//        Navigator.push(
+//            context,
+//            MaterialPageRoute(
+//              builder: (context) =>
+//             //     HomePage(),
+//         //   ));
       } else {
         save();
       }
@@ -143,11 +148,11 @@ class _Login extends State<Login> {
       prefs.setString("Birthdate", CustomerData.birhdate);
       //checkaccount(); }}}}
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => //HomePage(),
-          ));
+//      Navigator.push(
+//          context,
+//          MaterialPageRoute(
+//            builder: (context) => //HomePage(),
+//          ));
     }
   }
   Future<bool> _onWillPop() async {
@@ -209,7 +214,7 @@ class _Login extends State<Login> {
 
                   child: Column(children: <Widget>[
                     Container(child:CurveShape(
-                      Icons.person,AppTranslations.of(context).text("Login"),)),
+                      Icons.person,ApplicationLocalizations.of(context).translate("Login"),)),
 
                     Padding(  padding: EdgeInsets.fromLTRB(10, 30, 10, 20),
 
@@ -241,8 +246,8 @@ class _Login extends State<Login> {
                                               textSize: 12.0,
                                               textFont: "Nexa_Bold",
                                             ).textFieldWithOutPrefix(
-                                                AppTranslations.of(context).text("Email"),
-                                                AppTranslations.of(context).text("Email")),
+                                                ApplicationLocalizations.of(context).translate("Email"),
+                                              ApplicationLocalizations.of(context).translate("Email")),
                                           ),
                                         ),
                                       ),
@@ -280,8 +285,8 @@ class _Login extends State<Login> {
                                             textSize: 12.0,
                                             textFont: "Nexa_Bold",
                                           ).textFieldWithOutPrefix(
-                                              AppTranslations.of(context).text("Password"),
-                                              AppTranslations.of(context).text("Password")),
+                                              ApplicationLocalizations.of(context).translate("Password"),
+                                              ApplicationLocalizations.of(context).translate("Password")),
                                         ),
                                       ),
                                     ),
@@ -294,9 +299,9 @@ class _Login extends State<Login> {
                             EdgeInsets.only(top: 10, bottom: 10),
                             padding: EdgeInsets.all(10),
                             child: Row(children: <Widget>[
-                              Container(child: CheckBox("RemberMe")),
+                            //  Container(child: CheckBox("RemberMe")),
                               Text(
-                                AppTranslations.of(context).text("RemberMe"),
+                                ApplicationLocalizations.of(context).translate("RemberMe"),
 
                                 style: TextStyle(
                                     color: Colors.grey[600],
@@ -314,15 +319,16 @@ class _Login extends State<Login> {
                                 EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: FlatButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ForgetPassword(),
-                                          ));
+//                                      Navigator.push(
+//                                          context,
+//                                          MaterialPageRoute(
+//                                            builder: (context) =>
+//                                                //ForgetPassword(),
+//                                          ));
+//                                    },}
                                     },
                                     child: Text(
-                                      AppTranslations.of(context).text("ForgetPassword"),
+                                      ApplicationLocalizations.of(context).translate("ForgetPassword"),
                                       style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 15,
@@ -355,7 +361,7 @@ class _Login extends State<Login> {
 //                    if(email.text==''){ print ("Vaild Email");}else{print(email.text);}},
                                 color: Colors.indigo[900],
                                 child: buildButtonchild(
-                                  AppTranslations.of(context).text("Sign_in") ,
+                                  ApplicationLocalizations.of(context).translate("Sign_in") ,
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: Colors.white),
@@ -380,7 +386,7 @@ class _Login extends State<Login> {
                                 },
                                 color: Colors.indigo[900],
                                 child: Text(
-                                  AppTranslations.of(context).text("continue_without_Account"),
+                                  ApplicationLocalizations.of(context).translate("continue_without_Account"),
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: Colors.white),
@@ -393,15 +399,15 @@ class _Login extends State<Login> {
                           Container(
                             child: FlatButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CreateAccount(),
-                                      ));
+//                                  Navigator.push(
+//                                      context,
+//                                      MaterialPageRoute(
+//                                        builder: (context) =>
+//                                            CreateAccount(),
+//                                      ));
                                 },
                                 child: Text(
-                                  AppTranslations.of(context).text("Do_not_Have _an_Account? Sign Up")   ,
+                                  ApplicationLocalizations.of(context).translate("Do_not_Have _an_Account? Sign Up")   ,
                                   style: TextStyle(fontSize: 15),
                                 )),
 //              child: Text(
@@ -431,7 +437,7 @@ class _Login extends State<Login> {
             valueColor: AlwaysStoppedAnimation<Color>(Colors.indigo)),
       );
     } else {
-      return Text(  AppTranslations.of(context).text("Sign_in") ,
+      return Text(  ApplicationLocalizations.of(context).translate("Sign_in") ,
           style: TextStyle(fontSize: 20, color: Colors.white));
     }
   }
