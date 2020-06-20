@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'Login/Login.dart';
+import 'SplashScreen/SpalshScreen.dart';
 
 Future<Null> main() async {
   runApp(new LocalisedApp());
@@ -53,7 +54,7 @@ class LocalisedAppState extends State<LocalisedApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Login(),
+        home: SplashScreen(),
         locale: locale,
         localizationsDelegates: [
           ApplicationLocalizations.delegate,
@@ -62,6 +63,8 @@ class LocalisedAppState extends State<LocalisedApp> {
           //provides RTL support
           GlobalWidgetsLocalizations.delegate,
         ],
+
+
 //        onGenerateRoute: CustomRouter.all,
 //        initialRoute: '/',initialRoute
 

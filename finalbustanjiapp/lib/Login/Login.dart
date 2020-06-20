@@ -155,6 +155,7 @@ class _Login extends State<Login> {
 //          ));
     }
   }
+
   Future<bool> _onWillPop() async {
     return (
         await Navigator.push(
@@ -164,15 +165,28 @@ class _Login extends State<Login> {
             )));
 
   }
+
+  void onLocaleChange(Locale locale) async {
+    Locale chooselanguage;
+    switch(locale.languageCode){
+      case("en"):chooselanguage=Locale('en','US');
+      CustomerData.Language="English";
+      break;
+      case("ar"):chooselanguage=Locale('ar','SA');
+      CustomerData.Language="Arabic";break;
+    }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("Language",chooselanguage.languageCode);
+    LocalisedApp.setLocale(context,chooselanguage);
+  }
   void _select(String language) {
     print("dd " + language);
-    CustomerData.Language= language;
-    print(CustomerData.Language);
-    //onLocaleChange(Locale(languagesMap[language]));
-
-
+    setState(() {
+      CustomerData.Language = language;
+      print(CustomerData.Language);
+      onLocaleChange(Locale(languagesMap[language]));
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
