@@ -9,7 +9,7 @@ import 'package:language/CustomText/CustomTexts.dart';
 
 import 'package:language/CustomerInfo/CustomerData.dart';
 
-//import 'package:flutter_country_picker/flutter_country_picker.dart';
+import 'package:flutter_country_picker/flutter_country_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
 import 'package:language/Reservation/ReservationData.dart';
@@ -405,31 +405,31 @@ class _ContinueBoorkingInfoState extends State<ContinueBoorkingInfo> {
             ]))))));
   }
 
-//  Widget PhoneCode() {
-//    if (visiblitycode == false) {
-//      return Container(
-//          color: Colors.grey[100],
-//          padding: EdgeInsets.only(top: 10, bottom: 10),
-//          child: CountryPicker(
-//            dense: false,
-//            showFlag: false,
-//            showDialingCode: true,
-//            //displays dialing code, false by default
-//            showName: false,
-//            //displays country name, true by default
-//            showCurrency: false,
-//            //eg. 'British pound'
-//            showCurrencyISO: false,
-//            //eg. 'GBP'
-//            onChanged: (Country country) {
-//              setState(() {
-//                country2 = country;
-//              });
-//            },
-//            selectedCountry: country2,
-//          ));
-//    }
-//  }
+  Widget PhoneCode() {
+    if (visiblitycode == false) {
+      return Container(
+          color: Colors.grey[100],
+          padding: EdgeInsets.only(top: 10, bottom: 10),
+          child: CountryPicker(
+            dense: false,
+            showFlag: false,
+            showDialingCode: true,
+            //displays dialing code, false by default
+            showName: false,
+            //displays country name, true by default
+            showCurrency: false,
+            //eg. 'British pound'
+            showCurrencyISO: false,
+            //eg. 'GBP'
+            onChanged: (Country country) {
+              setState(() {
+            Country    country2 = country;
+              });
+            },
+            selectedCountry: country2,
+          ));
+    }
+  }
 
   Widget Phone() {
     txt.text = _PhoneNumber;

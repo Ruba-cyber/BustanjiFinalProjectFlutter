@@ -43,6 +43,7 @@ dev_dependencies:
   rate_my_app: ^0.6.0+2
   flutter_localizations:
     sdk: flutter
+  flutter_country_picker:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
