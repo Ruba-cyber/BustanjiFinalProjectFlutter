@@ -79,7 +79,7 @@ class CustomText {
               textAlign: textAlign,
               inputFormatters: list,
               decoration: InputDecoration(
-
+                border: InputBorder.none,
                 hintText: hint,
                 prefixIcon: prefix,
                 suffixIcon: suffix,

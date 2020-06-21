@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:language/Width/WidthAndHeight.dart';
 import 'package:meta/meta.dart';
 
 class CustomEmailText {
-
+  
   final double outPrefixSvgWidth;
   final double outPrefixSvgHeight;
   final int outPrefixSvgColor;
@@ -60,6 +61,7 @@ class CustomEmailText {
   }
 
   Widget textField(String hint, String errorMsg,BuildContext context) {
+    AppConfig appConfig = AppConfig(context);
     FocusNode focusNode =
     focusNod != null ? focusNod : new FocusNode();
 
@@ -70,9 +72,11 @@ class CustomEmailText {
         focusNode: focusNode,
         child: new FittedBox(
 
-            child:Container(padding:EdgeInsets.only(left: 7,right: 7,top: 3,bottom: 3),width: MediaQuery.of(context).size.width/1.3,height: 50,
+            child:Container(padding:EdgeInsets.only(left: 7,right: 7,top: 3,bottom: 3),
+              width: MediaQuery.of(context).size.width/1.3,height: 50,
 
-              child:Container(padding:EdgeInsets.only(left: 5,right: 5),width: 300,height: 50,
+              child:Container(padding:EdgeInsets.only(left: 5,right: 5),
+                width: appConfig.rWP(100),height: appConfig.rH(50),
 
                 child: new TextFormField(
                   obscureText: isPassword,
@@ -83,6 +87,7 @@ class CustomEmailText {
                   textAlign: TextAlign.start,
                   inputFormatters: list,
                   decoration: InputDecoration(
+                    border: InputBorder.none,
                     hintText: hint,
                     prefixIcon: prefix,
                     suffixIcon: suffix,
@@ -90,7 +95,7 @@ class CustomEmailText {
                   ),
                   validator: (val) => val.isEmpty ? errorMsg : null,
                   onSaved: (val) => val,
-                  style: TextStyle(fontSize: 17),),
+                  style: TextStyle(fontSize:appConfig.rH(2.2)),),
               ),
 
             )));
@@ -226,7 +231,7 @@ class _EnsureVisibleWhenFocusedState extends State<EnsureVisibleWhenFocused>
 
   @override
   Widget build(BuildContext context) {
-
+    AppConfig appConfig = AppConfig(context);
     return widget.child;
   }
 }

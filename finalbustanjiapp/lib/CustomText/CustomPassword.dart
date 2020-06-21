@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:language/Width/WidthAndHeight.dart';
 import 'package:meta/meta.dart';
 
 class CustomPasswordText {
@@ -61,14 +62,15 @@ class CustomPasswordText {
   Widget textField(String hint, String errorMsg,BuildContext context) {
     FocusNode focusNode =
     focusNod != null ? focusNod : new FocusNode();
-
+    AppConfig appConfig = AppConfig(context);
     var list = maxLength == 0 ? null:[
       LengthLimitingTextInputFormatter(maxLength),
     ];
     var loginBtn = new EnsureVisibleWhenFocused(
         focusNode: focusNode,
         child: new FittedBox(
-          child: Container(width: MediaQuery.of(context).size.width/1.3,padding: EdgeInsets.only(left: 8,right: 8),
+          child: Container(width: appConfig.rWP(100),height: appConfig.rH(50),
+            padding: EdgeInsets.only(left: 8,right: 8),
             child: new TextFormField(
               obscureText: isPassword,
               controller: inputBoxController,
@@ -80,7 +82,7 @@ class CustomPasswordText {
               decoration: InputDecoration(
                 hintText: hint,
                 prefixIcon: prefix,
-                suffixIcon: suffix,
+                suffixIcon: suffix,   border: InputBorder.none,
               ),
               validator: (val) => val.isEmpty ? errorMsg : null,
               onSaved: (val) => val,

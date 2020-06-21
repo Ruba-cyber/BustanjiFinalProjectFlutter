@@ -1,5 +1,6 @@
 
-{ "Warning": "تنبيه",
+{
+  "Warning": "تنبيه",
   "Warning_Restart_App":"اعادة تشغيل التطبيق لتغغير اللغة",
   "Restart_App": "اعادة تشغيل التطبيق لتغيير اللغة",
   "Login": "تسجيل الدخول",
@@ -51,6 +52,17 @@
   "Please_Enter_Pickup_Time": "يرجى اعادة ادخال وقت   الاستلام",
   "Please_Enter_Return_Date": "يرجى اعادة ادخال تاريخ العودة"
  ,
+  "Rating": "تقييم",
+  "Rating_Quality": "تقييم مدى تطبيقنا",
+  "All_Car": "جميع السيارات",
+  "Offer": "العروص",
+  "Are_You_sure_want_to_change ? ": "هل انت متاكد من عملية التعديل؟ سيتم التعديل على التكلفة الحجز",
+  "Restart_Application": "اعادة تشغيل التطبيق",
+  "Restart_App_Language": "سيتم اعادة تشغيل التطبيق لتغيير اللغة",
+  "Flight_Date_before_pickupdate": " تاريخ رحلة الطيران يجب ان يكون من ضمن الفترة",
+  "Can't_Reserve_less_than_one_day": "لا يمكنك ارجاع السيارة في نفس اليوم يجب, حجز السيارة على الاقل يوم واحد ",
+  "Can't_Reserve_in_same_day": "تاريخ الحصول على السيارة غير صحيح ولقد قمت باختيار تاريخ قديم",
+"Renter_Password": "تاكيد كلمة المرور",
   "Login_Error": "كلمة المرر او البريد الالكتروني غير صحيحة",
   "Mismatch_Password": "كلمه المرور غير مطابقة",
   "Please_Enter_Return_Time":"يرجى اعادة ادخال وقت العوده",

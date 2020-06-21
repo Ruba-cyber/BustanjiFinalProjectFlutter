@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:language/AppTranslation/AppTranslation.dart';
 import 'package:language/CustomerInfo/CustomerData.dart';
 import 'package:language/ReservationSteps/ChooseCar.dart';
 import 'package:language/Urls/BustanjiUrl.dart';
@@ -210,7 +211,7 @@ class _State extends State<Offer> {
                       child: ChooseCar(
                           snapshot,
                           index,
-                          "Hh",
+                          ApplicationLocalizations.of(context).translate("Warning_offer"),
                           " Offer"),
                       padding: EdgeInsets.symmetric(
                           horizontal: 0, vertical: 6),

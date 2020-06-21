@@ -14,8 +14,12 @@ import 'CustomText/CustomTexts.dart';
 import 'CustomerInfo/CustomerData.dart';
 import 'DateSelectedAndTime/DateSelected.dart';
 import 'DateSelectedAndTime/TimePicker.dart';
+import 'DropDownList/DropDownList.dart';
+import 'HomePage.dart';
 import 'OffersData/OfferDataAvaliable.dart';
 import 'Reservation/ReservationData.dart';
+
+import 'ReservationSteps/SecondStepChooseOptionAndInnsuranc.dart';
 import 'Urls/BustanjiUrl.dart';
 
 class MakeBooking extends StatefulWidget {
@@ -62,7 +66,7 @@ class _HomePageState extends State<MakeBooking> {
         context: context,
         builder: (context) {
           return AlertDialog(
-              title: Text(AppTranslations.of(context).text("Warning")),
+              title: Text(ApplicationLocalizations.of(context).translate("Warning")),
               content: Text(error),
               actions: <Widget>[
                 Row(children: <Widget>[
@@ -77,14 +81,14 @@ class _HomePageState extends State<MakeBooking> {
 //                            ));
                         Navigator.of(context).pop();
                       },
-                      child: Text(AppTranslations.of(context).text("ok"))),
+                      child: Text(ApplicationLocalizations.of(context).translate("ok"))),
                   MaterialButton(
                       elevation: 5.0,
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        (AppTranslations.of(context).text("cancel")),
+                        (ApplicationLocalizations.of(context).translate("Cancel")),
                       ))
                 ])
               ]);
@@ -457,7 +461,7 @@ class _HomePageState extends State<MakeBooking> {
           backgroundColor: Colors.indigo[900],
         ),
         drawer: Container(
-          child: NavigationDrawer(),
+         // child: NavigationDrawer(),
         ),
 
         // Not necessary for Option 1
@@ -508,7 +512,7 @@ class _HomePageState extends State<MakeBooking> {
                                                 MediaQuery.of(context).size.width / 1.3,
                                                 margin: EdgeInsets.only(left: 5, right: 5),
                                                 child: Container(
-                                                  width: 200,
+                                                  width: MediaQuery.of(context).size.width,
                                                   child: DropDownList(
                                                       ApplicationLocalizations.of(context).translate("PickupLoc"),
                                                       LocationList),

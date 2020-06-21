@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:language/Width/WidthAndHeight.dart';
 
 class CurveShape extends StatefulWidget {
   IconData icon;String text;
@@ -11,9 +12,21 @@ class CurveShape extends StatefulWidget {
 
 class _CurveShapeState extends State<CurveShape> {
   IconData icon;String text;
+  AppConfig _ac;
+  //provides localised strings
+double height,width;
   @override
   _CurveShapeState(this.icon,this.text);
   Widget build(BuildContext context) {
+    _ac = AppConfig(context);
+    if( MediaQuery
+        .of(context)
+        .orientation == Orientation.portrait){setState(() {
+          height=20;width=100;
+        });}
+        else{setState(() {
+          width=20;height=100;
+        });}
     return Container(
         decoration: (BoxDecoration(
             gradient: LinearGradient(
@@ -25,10 +38,9 @@ class _CurveShapeState extends State<CurveShape> {
                 ]),
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(80)))),
-        width: MediaQuery.of(context).size.width,
-        height: 150,
+
         child: Column(children: <Widget>[
-          Container(
+          Container(//margin: EdgeInsets.all(_ac.rH(2)),
             padding: EdgeInsets.all(10),
             child: Icon(icon,
               size: 60,

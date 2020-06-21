@@ -14,9 +14,14 @@ import 'package:language/CustomDesign/Icons.dart';
 import 'package:language/CustomText/CustomEmail.dart';
 import 'package:language/CustomText/CustomPassword.dart';
 import 'package:language/CustomerInfo/CustomerData.dart';
-import 'package:language/SplashScreen/SpalshScreen.dart';
+import 'package:language/ForgetPassword/ForgetPassword.dart';
+import 'package:language/NavigationDrawer/NavGuest.dart';
+import 'package:language/OfferAndAllCar/AllCarAndOffers.dart';
 import 'package:language/Urls/BustanjiUrl.dart';
+import 'package:language/Width/WidthAndHeight.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../CheckBox.dart';
+import '../HomePage.dart';
 import '../main.dart';
 
 class Login extends StatefulWidget {
@@ -26,7 +31,7 @@ class Login extends StatefulWidget {
 
 
 class _Login extends State<Login> {
-  bool isshowing=false;double fieldwidth = 300, height = 70;
+  bool isshowing=false;
   final button = new GlobalKey();
   static final List<String> languagesList = application.supportedLanguages;
   static final List<String> languageCodesList =
@@ -76,7 +81,10 @@ class _Login extends State<Login> {
     }
   }
 
-
+void CheckTheDeviceWidth(){
+    double width=MediaQuery.of(context).size.width;
+    print(width);
+}
 
   Future<List> LoginDatabase() async {
     var url = BustanjiUrls.login;
@@ -117,18 +125,19 @@ class _Login extends State<Login> {
         setState(() {
           isshowing = false;
         });
-
-//        Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) =>
-//             //     HomePage(),
-//         //   ));
+//
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  HomePage(),
+           ));
       } else {
         save();
       }
     }
   }
+
 
   Future<String> save() async {
     if (CustomerData.saveaccount == true) {
@@ -185,7 +194,9 @@ class _Login extends State<Login> {
     setState(() {
       CustomerData.Language = language;
       print(CustomerData.Language);
+      AlertDialogShow(context);
       onLocaleChange(Locale(languagesMap[language]));
+
     });
   }
   AlertDialogShow(BuildContext context) {
@@ -193,7 +204,7 @@ class _Login extends State<Login> {
         context: context,
         builder: (context) {
       return AlertDialog(
-          title: Text(ApplicationLocalizations.of(context).translate("Restart_App") ),
+          title: Text(ApplicationLocalizations.of(context).translate("Restart_Application") ),
           content: Text(ApplicationLocalizations.of(context).translate("Restart_App_Warning")),
           actions: <Widget>[
       Row(children: <Widget>[
@@ -202,11 +213,11 @@ class _Login extends State<Login> {
           onPressed: () {
 
             Navigator.of(context).pop();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SplashScreen(),
-                            ));
+//                        Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                              builder: (context) => HomePage(),
+//                            ));
           },
           child: Text(ApplicationLocalizations.of(context).translate("ok"))),
     MaterialButton(
@@ -219,12 +230,14 @@ class _Login extends State<Login> {
     ])]);});}
   @override
   Widget build(BuildContext context) {
-
+    AppConfig _ac;
     //provides localised strings
-
+    _ac = AppConfig(context);
     return new WillPopScope(
         onWillPop: _onWillPop,
         child: new Scaffold(
+resizeToAvoidBottomInset: false,
+
             appBar: new AppBar(backgroundColor: Colors.indigo[900],
 
 
@@ -246,9 +259,13 @@ class _Login extends State<Login> {
               ],
             ),
 
-          //  drawer:Container(child: NavGuest(),),
+            drawer:Container(child: NavGuest(),),
             body:SingleChildScrollView(
-              child: Container(margin: EdgeInsets.only(top: 10,bottom: 30,left: 10,right: 10),
+
+              child: Container(
+                height: _ac.rHP(100),
+                width: _ac.rWP(100),
+                margin: EdgeInsets.only(top: 10,bottom: 30,left: 10,right: 10),
 
                 child: Material(
                   elevation: 5.0,
@@ -256,7 +273,8 @@ class _Login extends State<Login> {
                   color: Colors.white,
 
                   child: Column(children: <Widget>[
-                    Container(child:CurveShape(
+                    Container(
+                        child:CurveShape(
                       Icons.person,ApplicationLocalizations.of(context).translate("Login"),)),
 
                     Padding(  padding: EdgeInsets.fromLTRB(10, 30, 10, 20),
@@ -272,85 +290,107 @@ class _Login extends State<Login> {
                               color: Colors.grey[200],
                             ),
 
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: FittedBox(
-                                child: Row(children: <Widget>[
-                                  Container(
-                                    child:SetIcons(Icons.person),),
-                                  Container(
-                                    child: InkWell(
-                                      child: Container(
-                                        child: Expanded(
-                                          child: Container(width: MediaQuery.of(context).size.width,
-                                            child: new CustomEmailText(
-                                              inputBoxController: teEmail,
-                                              focusNod: _focusNodeEmail,
-                                              textSize: 12.0,
-                                              textFont: "Nexa_Bold",
-                                            ).textFieldWithOutPrefix(
-                                                ApplicationLocalizations.of(context).translate("Email"),
-                                              ApplicationLocalizations.of(context).translate("Email"),context),
-                                          ),
-                                        ),
+                            child:   Container(
+                               // margin: EdgeInsets.only(top:10,bottom: 10),
+                                decoration: new BoxDecoration(color: Colors.grey[200],
+                                  borderRadius: new BorderRadius.all(
+                                      new Radius.circular(10.0)),
+
+                                ),
+                                height: 50,
+                                child: Row(
+                                    children: <Widget>[
+                                      Container(margin:EdgeInsets.only(left:5,bottom:5),
+                                        decoration: new BoxDecoration(color: Colors.indigo[700],
+                                          borderRadius: new BorderRadius.all(
+                                              new Radius.circular(1)),),
+
+                                        child: SetIcons(Icons.email),
                                       ),
-                                    ),
-                                  ),
+                                      Container(
+                                          child: InkWell(
+                                            onTap: () {
+
+                                            },
+
+                                            child:
+                                            Container(margin:EdgeInsets.only(top:5,bottom: 5),
+                                              child: Container(
+                                                child: new CustomEmailText(
+                                                  inputBoxController: teEmail,
+                                                  focusNod: _focusNodeEmail,
+                                                  textSize: 12.0,
+                                                  textFont: "Nexa_Bold",
+                                                ).textFieldWithOutPrefix(
+                                                    ApplicationLocalizations.of(context).translate("Email"),
+                                                    ApplicationLocalizations.of(context).translate("Email"),context),
+                                              ),
+                                            ),
 
 
-                                ]),
+                                          )),]))),//
 
 
-                              ),),
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.only(top: 5,bottom: 5),
-                            decoration: new BoxDecoration(
-                              borderRadius: new BorderRadius.all(
-                                  new Radius.circular(10.0)),
-                              color: Colors.grey[200],
-                            ),
-                            height: 50,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: FittedBox(
-                                child: Row(children: <Widget>[
-                                  Container(
-                                    child:SetIcons(Icons.lock),),
-                                  Container(
-                                    child: InkWell(
-                                      child: Expanded(
-                                        child: Container(width: MediaQuery.of(context).size.width,
-                                          child: new CustomPasswordText(
-                                            inputBoxController: tePassword,
-                                            focusNod: _focusNodePass,
-                                            textSize: 12.0,
-                                            textFont: "Nexa_Bold",
-                                          ).textFieldWithOutPrefix(
-                                              ApplicationLocalizations.of(context).translate("Password"),
-                                              ApplicationLocalizations.of(context).translate("Password"),context),
-                                        ),
-                                      ),
-                                    ),
-                                  ),   ]),
 
 
-                              ),),),
-                          Container(
+              Container(
+                  margin: EdgeInsets.only(top:10,bottom: 10,),
+                  decoration: new BoxDecoration(color: Colors.grey[200],
+                    borderRadius: new BorderRadius.all(
+                        new Radius.circular(10.0)),
+
+                  ),
+                  height: 50,
+                  child: Row(
+                      children: <Widget>[
+                        Container(
+                          decoration: new BoxDecoration(color: Colors.indigo[700],
+                            borderRadius: new BorderRadius.all(
+                                new Radius.circular(1)),),
+
+                          child: SetIcons(Icons.lock),
+                        ),
+                        Container(
+                            child: InkWell(
+                              onTap: () {
+
+                              },
+
+                              child:
+                              Container(
+                                child: Container(
+                                  child: new CustomPasswordText(
+                                    inputBoxController: tePassword,
+                                    focusNod: _focusNodePass,
+                                    textSize: 12.0,
+                                    textFont: "Nexa_Bold",
+                                  ).textFieldWithOutPrefix(
+                                      ApplicationLocalizations.of(context).translate("Password"),
+                                      ApplicationLocalizations.of(context).translate("Password"),context),
+                                ),
+                              ),
+
+
+                            )),])),//
+
+
+            ]),),),
+                          Container(width: MediaQuery.of(context).size.width,
                             margin:
                             EdgeInsets.only(top: 10, bottom: 10),
                             padding: EdgeInsets.all(10),
                             child: Row(children: <Widget>[
-                            //  Container(child: CheckBox("RemberMe")),
-                              Text(
-                                ApplicationLocalizations.of(context).translate("RemberMe"),
+                             Container(child: CheckBox("RemberMe")),
+                              FittedBox(
+                                child: Text(
+                                  ApplicationLocalizations.of(context).translate("RemberMe"),
 
-                                style: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
 
+                                ),
                               ),
 
 
@@ -362,37 +402,30 @@ class _Login extends State<Login> {
                                 EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: FlatButton(
                                     onPressed: () {
-//                                      Navigator.push(
-//                                          context,
-//                                          MaterialPageRoute(
-//                                            builder: (context) =>
-//                                                //ForgetPassword(),
-//                                          ));
-//                                    },}
-                                    },
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgetPassword(),
+
+                               ));},
+
                                     child: Text(
                                       ApplicationLocalizations.of(context).translate("ForgetPassword"),
                                       style: TextStyle(
                                           color: Colors.grey[600],
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold),
-                                    )),
-                              ),
+                                    ),),),
 
-//
-//                                        child: Text(
-//                                          "Forget Password",
-//                                          style: TextStyle(
-//                                              color: Colors.grey[700],
-//                                              fontSize: 15,
-//                                              fontWeight: FontWeight.bold),
-//                                        ))
-                            ]),
-                          ),
+])),
+
+
+
                           Container(
                             key: button,
                             height: 50,
-                            width: fieldwidth,
+                            width:500,
                             margin: EdgeInsets.fromLTRB(30, 0, 10, 0),
                             child: RaisedButton(
                                 onPressed: () {
@@ -414,18 +447,19 @@ class _Login extends State<Login> {
                                       Radius.circular(10.0)),
                                 )),
                           ),
-                          Container(
-                            width: 300,
-                            margin: EdgeInsets.fromLTRB(30, 0, 10, 0),
+                          Container(height: 50,
+                            width: 500,
+                            margin: EdgeInsets.only(left:30,right:30,top: 30,bottom:30),
+                          //  padding: EdgeInsets.only(left:30,right:30,top: 10,bottom:10),
                             child: RaisedButton(
                                 onPressed: () {
                                   CustomerData.CustomerType = 'Guest';
-//                                                  Navigator.push(
-//                                                      context,
-//                                                      MaterialPageRoute(
-//                                                        builder: (context) =>
-//                                                            OffersAndAllcar(),
-//                                                      ));
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            OffersAndAllcar(),
+                                                      ));
                                 },
                                 color: Colors.indigo[900],
                                 child: Text(
@@ -463,14 +497,13 @@ class _Login extends State<Login> {
                         ]),
                       ),
 
-                    )]),
-                ),
-              ),
-            )));
+                ))));}
 
 
 
-  }
+
+
+
 
   Widget buildButtonchild(String s, {TextStyle style}) {
     if (isshowing == true) {

@@ -14,7 +14,8 @@ class _IconState extends State<SetIcons> {
   _IconState(this.icon);
   @override
   Widget build(BuildContext context) {
-    return Container( decoration: new BoxDecoration(
+    return Container(
+        decoration: new BoxDecoration(
       borderRadius: new BorderRadius.all(
           new Radius.circular(1.0)),
       color: Colors.indigo[700],
@@ -22,7 +23,7 @@ class _IconState extends State<SetIcons> {
         padding: EdgeInsets.all(10),
         child:Icon(icon,
           color: Colors.white,
-          size: 30,
+          size:30,
         ));
   }
 }
